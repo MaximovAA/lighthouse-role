@@ -14,9 +14,10 @@
   ansible.builtin.file:
     path: /usr/share/nginx/lighthouse
     state: absent
-- name: Clone lighthouse Rep
-  become: true
-  ansible.builtin.command: "git clone https://github.com/VKCOM/lighthouse.git /usr/share/nginx/lighthouse"
+- name: Read-write git checkout from github
+  ansible.builtin.git:
+    repo: https://github.com/VKCOM/lighthouse.git
+    dest: /usr/share/nginx/lighthouse
 - name: write nginx.conf using jinja2
   ansible.builtin.template:
      src: nginx.conf.j2
